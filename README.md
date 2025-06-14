@@ -1,34 +1,49 @@
 # Sleep Time Survey (Local → KST)
 
-A web-based survey tool that collects:
+This is a web-based survey tool that collects:
 - Local sleep and wake times
 - Lunch consumption status
 - Self-reported sleepiness (on a 0–10 scale)
-and converts all time data to Korea Standard Time (KST).
 
-## 🙏 Why This Survey?
-
-Hello!  
-This survey is part of a personal academic project and is currently being used for coursework at school.
-
-I would be sincerely grateful if you could take a minute to participate — your anonymous responses will help analyze sleep and alertness patterns across different time zones.
-
-### 🛡 Privacy Notice
-
-- ✅ No login required  
-- ✅ No personal information is collected  
-- ✅ Your responses are not traceable and used **only** for non-commercial academic purposes  
-
-## 🌐 Try the Survey
-
-👉 [Click here to participate](https://ep-wyvern.github.io/sleep-time-survey-kst/)
-
-## 📁 Project Contents
-
-- `index.html`: The main survey page
-- `.nojekyll`: Enables GitHub Pages to treat this as a static site
-- `README.md`: Project description
+All time data is automatically converted to Korea Standard Time (KST) to enable consistent analysis across participants in different time zones.
 
 ---
 
-If you’d like to give feedback or see the aggregated results in the future, feel free to open an issue or leave a message.
+## 📚 About This Project
+
+This survey is being conducted as part of a **university course project for Engineering Statistics**.
+
+The purpose is to **analyze potential correlations** between:
+- Sleep patterns  
+- Lunch behavior  
+- Perceived sleepiness during early afternoon
+
+Your input will help support a real-world statistical correlation analysis.
+
+---
+
+## 🔒 Privacy Notice
+
+- ✅ No login or sign-up required  
+- ✅ No personal information is collected  
+- ✅ All data is completely anonymous and used **only for educational, non-commercial purposes**
+
+---
+
+## 🙏 We Need Your Help!
+
+If you could take **less than a minute** to participate, it would greatly contribute to this academic analysis.
+
+👉 [Click here to take the survey](https://ep-wyvern.github.io/sleep-time-survey-kst/)
+
+---
+
+## 📁 Files in This Repository
+
+- `index.html`: Main survey interface  
+- `.nojekyll`: Ensures GitHub Pages treats this as a static site  
+- `README.md`: Project overview and participation details  
+
+---
+
+If you'd like to give feedback, see results later, or have questions, feel free to open a GitHub Issue.
