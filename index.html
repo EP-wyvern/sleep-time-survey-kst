@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sleep Time Survey (Local → KST Conversion)</title>
+  <style>
+    body { font-family: "Noto Sans KR", sans-serif; background: #f7f7f7; margin: 0; padding: 0; }
+    .container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 8px;
+                 box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 24px; }
+    h1 { text-align: center; color: #333; margin-bottom: 24px; }
+    label { display: block; margin-top: 16px; color: #555; font-weight: 500; }
+    input[list], input[type="text"], input[type="submit"], input[type="range"] {
+      width: 100%; margin-top: 8px; padding: 8px; border: 1px solid #ccc;
+      border-radius: 4px; font-size: 1rem; box-sizing: border-box;
+    }
+    .radio-group { display: flex; gap: 8px; margin-top: 8px; }
+    .radio-group input[type="radio"] { display: none; }
+    .radio-group span {
+      flex: 1; display: inline-block; text-align: center; padding: 8px;
+      border: 1px solid #99c; border-radius: 4px; background: #eef;
+      cursor: pointer; user-select: none;
+    }
+    .radio-group input[type="radio"]:checked + span {
+      background: #99c; color: #fff; border-color: #77a;
+    }
+    .range-value { text-align: right; font-size: 0.9rem; color: #555; margin-top: 4px; }
+    input[type="submit"] {
+      background: #4466cc; color: #fff; border: none; cursor: pointer;
+      margin-top: 24px; transition: background 0.2s;
+    }
+    input[type="submit"]:hover { background: #3355aa; }
+    table { width: 100%; border-collapse: collapse; margin-top: 32px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: center; font-size: 0.9rem; }
+    th { background: #f0f0f0; color: #333; }
+    tr:nth-child(even) { background: #fafafa; }
+    .footer { text-align: center; color: #888; font-size: 0.8rem; margin-top: 24px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Sleep Time Survey (Local → KST Conversion)</h1>
+    <form id="survey-form">
+      <!-- 0. Country of Residence -->
+      <label for="country">0. Country of Residence</label>
+      <input list="country-list" id="country" name="country" placeholder="e.g.: South Korea" required>
+      <datalist id="country-list">
+        <option value="Afghanistan"><option value="Albania"><option value="Algeria">
+        <option value="Andorra"><option value="Angola"><option value="Antigua and Barbuda">
+        <option value="Argentina"><option value="Armenia"><option value="Australia">
+        <option value="Austria"><option value="Azerbaijan"><option value="Bahamas">
+        <option value="Bahrain"><option value="Bangladesh"><option value="Barbados">
+        <option value="Belarus"><option value="Belgium"><option value="Belize">
+        <option value="Benin"><option value="Bhutan"><option value="Bolivia">
+        <option value="Bosnia and Herzegovina"><option value="Botswana"><option value="Brazil">
+        <option value="Brunei"><option value="Bulgaria"><option value="Burkina Faso">
+        <option value="Burundi"><option value="Côte d'Ivoire"><option value="Cabo Verde">
+        <option value="Cambodia"><option value="Cameroon"><option value="Canada">
+        <option value="Central African Republic"><option value="Chad"><option value="Chile">
+        <option value="China"><option value="Colombia"><option value="Comoros">
+        <option value="Congo, Democratic Republic of the"><option value="Congo, Republic of the">
+        <option value="Costa Rica"><option value="Croatia"><option value="Cuba">
+        <option value="Cyprus"><option value="Czech Republic"><option value="Denmark">
+        <option value="Djibouti"><option value="Dominica"><option value="Dominican Republic">
+        <option value="Ecuador"><option value="Egypt"><option value="El Salvador">
+        <option value="Equatorial Guinea"><option value="Eritrea"><option value="Estonia">
+        <option value="Eswatini"><option value="Ethiopia"><option value="Fiji">
+        <option value="Finland"><option value="France"><option value="Gabon">
+        <option value="Gambia"><option value="Georgia"><option value="Germany">
+        <option value="Ghana"><option value="Greece"><option value="Grenada">
+        <option value="Guatemala"><option value="Guinea"><option value="Guinea-Bissau">
+        <option value="Guyana"><option value="Haiti"><option value="Honduras">
+        <option value="Hungary"><option value="Iceland"><option value="India">
+        <option value="Indonesia"><option value="Iran"><option value="Iraq">
+        <option value="Ireland"><option value="Israel"><option value="Italy">
+        <option value="Jamaica"><option value="Japan"><option value="Jordan">
+        <option value="Kazakhstan"><option value="Kenya"><option value="Kiribati">
+        <option value="Korea, North"><option value="Korea, South"><option value="Kosovo">
+        <option value="Kuwait"><option value="Kyrgyzstan"><option value="Laos">
+        <option value="Latvia"><option value="Lebanon"><option value="Lesotho">
+        <option value="Liberia"><option value="Libya"><option value="Liechtenstein">
+        <option value="Lithuania"><option value="Luxembourg"><option value="Madagascar">
+        <option value="Malawi"><option value="Malaysia"><option value="Maldives">
+        <option value="Mali"><option value="Malta"><option value="Marshall Islands">
+        <option value="Mauritania"><option value="Mauritius"><option value="Mexico">
+        <option value="Micronesia"><option value="Moldova"><option value="Monaco">
+        <option value="Mongolia"><option value="Montenegro"><option value="Morocco">
+        <option value="Mozambique"><option value="Myanmar"><option value="Namibia">
+        <option value="Nauru"><option value="Nepal"><option value="Netherlands">
+        <option value="New Zealand"><option value="Nicaragua"><option value="Niger">
+        <option value="Nigeria"><option value="North Macedonia"><option value="Norway">
+        <option value="Oman"><option value="Pakistan"><option value="Palau">
+        <option value="Panama"><option value="Papua New Guinea"><option value="Paraguay">
+        <option value="Peru"><option value="Philippines"><option value="Poland">
+        <option value="Portugal"><option value="Qatar"><option value="Romania">
+        <option value="Russia"><option value="Rwanda"><option value="Saint Kitts and Nevis">
+        <option value="Saint Lucia"><option value="Saint Vincent and the Grenadines">
+        <option value="Samoa"><option value="San Marino"><option value="Sao Tome and Principe">
+        <option value="Saudi Arabia"><option value="Senegal"><option value="Serbia">
+        <option value="Seychelles"><option value="Sierra Leone"><option value="Singapore">
+        <option value="Slovakia"><option value="Slovenia"><option value="Solomon Islands">
+        <option value="Somalia"><option value="South Africa"><option value="South Sudan">
+        <option value="Spain"><option value="Sri Lanka"><option value="Sudan">
+        <option value="Suriname"><option value="Sweden"><option value="Switzerland">
+        <option value="Syria"><option value="Taiwan"><option value="Tajikistan">
+        <option value="Tanzania"><option value="Thailand"><option value="Timor-Leste">
+        <option value="Togo"><option value="Tonga"><option value="Trinidad and Tobago">
+        <option value="Tunisia"><option value="Turkey"><option value="Turkmenistan">
+        <option value="Tuvalu"><option value="Uganda"><option value="Ukraine">
+        <option value="United Arab Emirates"><option value="United Kingdom">
+        <option value="United States of America"><option value="Uruguay">
+        <option value="Uzbekistan"><option value="Vanuatu"><option value="Vatican City">
+        <option value="Venezuela"><option value="Vietnam"><option value="Yemen">
+        <option value="Zambia"><option value="Zimbabwe">
+      </datalist>
+
+      <!-- 1. Sleep time -->
+      <label for="sleep-time">1. What time did you go to bed yesterday? (24-hour)</label>
+      <input type="text" id="sleep-time" name="sleep_time"
+             placeholder="e.g.: 23.5" inputmode="decimal" required>
+
+      <!-- 2. Wake time -->
+      <label for="wake-time">2. What time did you wake up today? (24-hour)</label>
+      <input type="text" id="wake-time" name="wake_time"
+             placeholder="e.g.: 7.5" inputmode="decimal" required>
+
+      <!-- 3. Lunch eaten? -->
+      <label>3. Did you eat lunch today?</label>
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="lunch" value="Yes" required>
+          <span>Yes</span>
+        </label>
+        <label>
+          <input type="radio" name="lunch" value="No">
+          <span>No</span>
+        </label>
+      </div>
+
+      <!-- 4. Sleepiness -->
+      <label for="sleepiness">4. How sleepy were you at lunchtime (12:00–15:00)?</label>
+      <input type="range" id="sleepiness" name="sleepiness"
+             min="0" max="10" value="5" oninput="updateRangeValue(this.value)">
+      <div class="range-value">Current value: <span id="range-val">5</span> points</div>
+
+      <input type="submit" value="Submit">
+    </form>
+
+    <table id="data-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Country</th>
+          <th>Local Sleep</th>
+          <th>Local Wake</th>
+          <th>Lunch</th>
+          <th>Sleepiness</th>
+          <th>KST Sleep</th>
+          <th>KST Wake</th>
+          <th>KST Duration (hrs)</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <div class="footer">© 2025 Survey System Example</div>
+  </div>
+
+  <script>
+    const STORAGE_KEY = "surveyData";
+    function loadEntries() {
+      const json = localStorage.getItem(STORAGE_KEY);
+      return json ? JSON.parse(json) : [];
+    }
+    function saveEntries(entries) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+    }
+
+    let entries = loadEntries();
+    let entryCount = entries.length;
+
+    function renderTable() {
+      const tbody = document.querySelector("#data-table tbody");
+      tbody.innerHTML = "";
+      entries.forEach((e, i) => {
+        tbody.insertAdjacentHTML("beforeend", `
+          <tr>
+            <td>${i+1}</td>
+            <td>${e.country}</td>
+            <td>${e.localSleep}</td>
+            <td>${e.localWake}</td>
+            <td>${e.lunch}</td>
+            <td>${e.sleepiness}</td>
+            <td>${e.kstSleep}</td>
+            <td>${e.kstWake}</td>
+            <td>${e.duration}</td>
+          </tr>`);
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderTable();
+      updateRangeValue(5);
+    });
+
+    const countryOffset = {
+      "Afghanistan":4.5,"Albania":1,"Algeria":1,"Andorra":1,"Angola":1,
+      "Antigua and Barbuda":-4,"Argentina":-3,"Armenia":4,"Australia":10,
+      "Austria":1,"Azerbaijan":4,"Bahamas":-5,"Bahrain":3,"Bangladesh":6,
+      "Barbados":-4,"Belarus":3,"Belgium":1,"Belize":-6,"Benin":1,"Bhutan":6,
+      "Bolivia":-4,"Bosnia and Herzegovina":1,"Botswana":2,"Brazil":-3,
+      "Brunei":8,"Bulgaria":2,"Burkina Faso":0,"Burundi":2,"Côte d'Ivoire":0,
+      "Cabo Verde":-1,"Cambodia":7,"Cameroon":1,"Canada":-5,
+      "Central African Republic":1,"Chad":1,"Chile":-4,"China":8,
+      "Colombia":-5,"Comoros":3,"Congo, Democratic Republic of the":1,
+      "Congo, Republic of the":1,"Costa Rica":-6,"Croatia":1,"Cuba":-5,
+      "Cyprus":2,"Czech Republic":1,"Denmark":1,"Djibouti":3,"Dominica":-4,
+      "Dominican Republic":-4,"Ecuador":-5,"Egypt":2,"El Salvador":-6,
+      "Equatorial Guinea":1,"Eritrea":3,"Estonia":2,"Eswatini":2,
+      "Ethiopia":3,"Fiji":12,"Finland":2,"France":1,"Gabon":1,"Gambia":0,
+      "Georgia":4,"Germany":1,"Ghana":0,"Greece":2,"Grenada":-4,
+      "Guatemala":-6,"Guinea":0,"Guinea-Bissau":0,"Guyana":-4,"Haiti":-5,
+      "Honduras":-6,"Hungary":1,"Iceland":0,"India":5.5,"Indonesia":7,
+      "Iran":3.5,"Iraq":3,"Ireland":0,"Israel":2,"Italy":1,"Jamaica":-5,
+      "Japan":9,"Jordan":2,"Kazakhstan":6,"Kenya":3,"Kiribati":14,
+      "Korea, North":9,"Korea, South":9,"Kosovo":1,"Kuwait":3,
+      "Kyrgyzstan":6,"Laos":7,"Latvia":2,"Lebanon":2,"Lesotho":2,
+      "Liberia":0,"Libya":2,"Liechtenstein":1,"Lithuania":2,"Luxembourg":1,
+      "Madagascar":3,"Malawi":2,"Malaysia":8,"Maldives":5,"Mali":0,
+      "Malta":1,"Marshall Islands":12,"Mauritania":0,"Mauritius":4,
+      "Mexico":-6,"Micronesia":10,"Moldova":2,"Monaco":1,"Mongolia":8,
+      "Montenegro":1,"Morocco":0,"Mozambique":2,"Myanmar":6.5,"Namibia":2,
+      "Nauru":12,"Nepal":5.75,"Netherlands":1,"New Zealand":12,
+      "Nicaragua":-6,"Niger":1,"Nigeria":1,"North Macedonia":1,
+      "Norway":1,"Oman":4,"Pakistan":5,"Palau":9,"Panama":-5,
+      "Papua New Guinea":10,"Paraguay":-4,"Peru":-5,"Philippines":8,
+      "Poland":1,"Portugal":0,"Qatar":3,"Romania":2,"Russia":3,
+      "Rwanda":2,"Saint Kitts and Nevis":-4,"Saint Lucia":-4,
+      "Saint Vincent and the Grenadines":-4,"Samoa":13,"San Marino":1,
+      "Sao Tome and Principe":0,"Saudi Arabia":3,"Senegal":0,"Serbia":1,
+      "Seychelles":4,"Sierra Leone":0,"Singapore":8,"Slovakia":1,
+      "Slovenia":1,"Solomon Islands":11,"Somalia":3,"South Africa":2,
+      "South Sudan":3,"Spain":1,"Sri Lanka":5.5,"Sudan":2,"Suriname":-3,
+      "Sweden":1,"Switzerland":1,"Syria":2,"Taiwan":8,"Tajikistan":5,
+      "Tanzania":3,"Thailand":7,"Timor-Leste":9,"Togo":0,"Tonga":13,
+      "Trinidad and Tobago":-4,"Tunisia":1,"Turkey":3,"Turkmenistan":5,
+      "Tuvalu":12,"Uganda":3,"Ukraine":2,"United Arab Emirates":4,
+      "United Kingdom":0,"United States of America":-5,"Uruguay":-3,
+      "Uzbekistan":5,"Vanuatu":11,"Vatican City":1,"Venezuela":-4,
+      "Vietnam":7,"Yemen":3,"Zambia":2,"Zimbabwe":2
+    };
+
+    function localToKST(timeLocal, country) {
+      const offset = countryOffset[country] != null
+        ? countryOffset[country]
+        : -new Date().getTimezoneOffset() / 60;
+      const kst = (parseFloat(timeLocal) + (9 - offset) + 24) % 24;
+      return parseFloat(kst.toFixed(1));
+    }
+
+    function restrictKey(e) {
+      const k = e.key;
+      if (["Backspace","Tab","ArrowLeft","ArrowRight","Delete"].includes(k)) return;
+      if (k === "." && !e.target.value.includes(".")) return;
+      if (/^[0-9]$/.test(k)) return;
+      e.preventDefault();
+    }
+
+    const composing = new WeakMap();
+    function sanitizeAndTruncate(e) {
+      if (composing.get(e.target)) return;
+      let v = e.target.value.replace(/[^\d.]/g, "");
+      const parts = v.split(".");
+      let ip = parts[0].slice(0,2);
+      let out = ip;
+      if (parts[1] != null) out = ip + "." + parts[1].charAt(0);
+      e.target.value = out;
+    }
+
+    document.querySelectorAll("#sleep-time,#wake-time").forEach(input => {
+      input.addEventListener("keydown", restrictKey);
+      input.addEventListener("compositionstart", () => composing.set(input, true));
+      input.addEventListener("compositionend", e => {
+        composing.set(input, false);
+        sanitizeAndTruncate(e);
+      });
+      input.addEventListener("input", sanitizeAndTruncate);
+    });
+
+    function updateRangeValue(val) {
+      document.getElementById("range-val").textContent = val;
+    }
+
+    document.getElementById("survey-form")
+      .addEventListener("submit", function(e) {
+        e.preventDefault();
+        const c  = this.country.value.trim();
+        const s  = this.sleep_time.value;
+        const w  = this.wake_time.value;
+        const l  = this.lunch.value;
+        const sl = this.sleepiness.value;
+        const ks = localToKST(s, c);
+        const kw = localToKST(w, c);
+        let dur = kw - ks;
+        if (dur < 0) dur += 24;
+        dur = parseFloat(dur.toFixed(1));
+        const entry = {
+          country: c,
+          localSleep: s,
+          localWake: w,
+          lunch: l,
+          sleepiness: sl,
+          kstSleep: ks,
+          kstWake: kw,
+          duration: dur
+        };
+        entries.push(entry);
+        saveEntries(entries);
+        renderTable();
+        updateRangeValue(5);
+        this.reset();
+      });
+  </script>
+</body>
+</html>
